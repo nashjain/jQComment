@@ -1,0 +1,12 @@
+#comments .comment {
+    background-color: #0000ff;
+    border: #000041 solid 2px;
+    width: 30%;
+}
+
+#comments .comment p {
+    background-color: #6495ed;
+    border: #fbff09 solid 2px;
+    width: 90%;
+    margin: 10px auto;
+}
