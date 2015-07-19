@@ -1,0 +1,36 @@
+{
+  "name": "jqcomment",
+  "version": "0.0.1",
+  "description": "Simple jQuery Comments Plugin",
+  "homepage": "https://github.com/nashjain/jQComment",
+  "author": {
+    "name": "Naresh Jain",
+    "email": "nashjain@gmail.com"
+  },
+  "license": "MIT License",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nashjain/jQComment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nashjain/jQComment/issues"
+  },
+  "dependencies": {
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.2",
+    "karma-jasmine": "^0.3.6",
+    "karma-jasmine-jquery": "^0.1.1",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-safari-launcher": "^0.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "karma start >/dev/null & sleep 3 && karma run && ps -ef | grep karma | grep -v grep | awk '{print $2}' | xargs kill -9"
+  },
+  "keywords": [
+    "jQuery",
+    "comments",
+    "plugin"
+  ]
+}
