@@ -1,8 +1,9 @@
-describe("jQuery Comments Plugin", function () {
+describe("jQuery Comments Plugin (File Fixture)", function () {
+    jasmine.getFixtures().fixturesPath = 'base/spec/javascripts/fixtures';
     var comments;
 
     beforeEach(function () {
-        setFixtures('<div id="comments"></div>');
+        loadFixtures('comments_fixture.html');
         comments = $('#comments');
     });
 
