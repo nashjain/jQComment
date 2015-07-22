@@ -2,6 +2,7 @@ Comment = function (data) {
     this.user = data.user;
     this.comment = data.comment;
     this.updatedOn = Date.parse(data.updatedOn);
+    this.private = data.private || false;
 };
 
 Comment.prototype.toHtml = function ($) {
@@ -23,22 +24,33 @@ Comments = function (data) {
     });
 };
 
-Comments.prototype.toHtml = function ($) {
-    if (this.data.length == 0) {
+Comments.prototype.toHtml = function ($, loggedInUser) {
+    var authorisedComments =  this.data.filter(function (c) {
+        return loggedInUser === c.user || !c.private;
+    });
+
+    if (authorisedComments.length == 0) {
         return $("<div>").addClass("empty").append("Be the first one to comment...");
     }
 
     var innerHTML = $("<div>");
 
-    this.data.forEach(function (c) {
-        innerHTML.append(c.toHtml($));
+    authorisedComments.forEach(function (c) {
+            innerHTML.append(c.toHtml($));
     });
     return innerHTML.html();
 };
 
 (function ($) {
-    $.fn.jQComments = function (data) {
-        $(this).append((new Comments(data)).toHtml($));
+    $.fn.jQComments = function (options) {
+        var defaults = {
+            data: [],
+            loggedInUser: undefined
+        };
+
+        var opts = $.extend( defaults, options );
+
+        $(this).append((new Comments(opts.data)).toHtml($, opts.loggedInUser));
         return this;
     }
 })(jQuery);
