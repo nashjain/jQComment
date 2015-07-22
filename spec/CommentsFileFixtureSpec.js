@@ -8,10 +8,11 @@ describe("jQuery Comments Plugin (File Fixture)", function () {
     });
 
     it("Should add comments div from passed in json", function () {
-        comments.jQComments({comment:"First Comment", user:"Naresh"});
-        expect(comments).toContainElement('div.comment p');
-        expect(comments).toContainText('First Comment -- Naresh');
-        expect($('.comment').size()).toBe(1);
+        comments.jQComments([{comment:"First Comment", user:"Naresh"}]);
+        expect(comments).toContainElement('div.comment');
+        expect(comments.find('div.comment').size()).toBe(1);
+        expect(comments.find('div.comment div.comment-header')).toContainText('Naresh');
+        expect(comments.find('div.comment div.comment-body')).toContainText('First Comment');
     });
 });
 

@@ -1,12 +1,18 @@
 #comments .comment {
-    background-color: #0000ff;
-    border: #000041 solid 2px;
-    width: 30%;
+    margin: 10px;
+}
+#comments .comment .comment-header {
+    background-color: #e0e0e0;
+    padding: 5px;
+    border-bottom: 2px solid #cccccc;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
-#comments .comment p {
-    background-color: #6495ed;
-    border: #fbff09 solid 2px;
-    width: 90%;
-    margin: 10px auto;
+#comments .comment .comment-body{
+    background-color: #e8e8e8;
+    height: 100%;
+    padding: 5px 10px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
