@@ -1,9 +1,15 @@
 describe("jQuery Comments Plugin", function () {
     var comments;
+    var getURL = 'http://localhost/jQComment/comments.php';
 
     beforeEach(function () {
         setFixtures('<div id="comments"></div>');
         comments = $('#comments');
+        jasmine.Ajax.install();
+    });
+
+    afterEach(function () {
+        jasmine.Ajax.uninstall();
     });
 
     it("Should give a nice message when passed in json has no comments", function () {
@@ -56,5 +62,36 @@ describe("jQuery Comments Plugin", function () {
         expect(comments.find('div.comment div.comment-header')).toContainText('Naresh');
     });
 
-});
+    it("Should fetch data from URL and display comments", function () {
+        var expectedAjaxResponse = [{comment: "First Comment", user: "Naresh", updatedOn: "2014-09-19T15:28:46.493Z"}, {comment: "Second Comment", user: "James", updatedOn: "2014-06-19T15:28:46.493Z"}, {comment: "Third Comment", user: "Jack", updatedOn: "2014-12-19T15:28:46.493Z"}];
+        var opts = {url: getURL};
 
+        jasmine.Ajax.stubRequest(getURL).andReturn({
+                status: 200,
+                statusText: 'HTTP/1.1 200 OK',
+                contentType: 'application/json;charset=UTF-8',
+                responseText: JSON.stringify(expectedAjaxResponse)
+            });
+
+        comments.jQComments(opts);
+        expect(comments.find('div.comment').size()).toBe(expectedAjaxResponse.length);
+        expect(comments.find('div.comment div.comment-header:first')).toContainText('Jack');
+        expect(comments.find('div.comment div.comment-header:last')).toContainText('James');
+    });
+
+    it("Should try to fetch data from URL and display error message when unsuccessful", function () {
+        var opts = {url: getURL};
+
+        jasmine.Ajax.stubRequest(getURL).andReturn({
+            status: 400,
+            statusText: 'HTTP/1.1 400 Bad Request',
+            contentType: 'application/json;charset=UTF-8',
+            responseText: ''
+        });
+
+        comments.jQComments(opts);
+        expect($('div.comment').size()).toBe(0);
+        expect(comments).toContainElement('div.error');
+        expect(comments).toContainText('Failed to fetch comments from URL...');
+    });
+});
