@@ -1,7 +1,7 @@
 //Comment Model
 Comment = function (data) {
     this.user = data.user;
-    this.comment = data.comment;
+    this.msg = data.msg;
     this.updatedOn = Date.parse(data.updatedOn);
     this.private = data.private || false;
 };
@@ -44,7 +44,7 @@ CommentsView.prototype._errorHtml = function () {
 
 CommentsView.prototype._toCommentHtml = function (c) {
     var header = this.jq('<div>').addClass('comment-header').append(c.user);
-    var commentBody = this.jq('<div>').addClass('comment-body').append(c.comment);
+    var commentBody = this.jq('<div>').addClass('comment-body').append(c.msg);
     return this.jq('<div>').addClass('comment').append(header).append(commentBody);
 };
 

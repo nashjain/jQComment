@@ -10,10 +10,7 @@
 <body>
 <div id="comments"></div>
 <script type="text/javascript">
-    var getURL = 'http://localhost/jQComment/comments.php';
-    var opts = {url: getURL};
-    var data = {data: [{comment: "First Comment", user: "Naresh", updatedOn: "2014-12-19T15:28:46.493Z"}, {comment: "Second Comment", user: "James", updatedOn: "2015-06-19T15:28:46.493Z"}]};
-    $( "#comments" ).jQComments(opts);
+    $( "#comments" ).jQComments({url: 'http://localhost/jQComment/comments.php'});
 </script>
 </body>
 </html>
