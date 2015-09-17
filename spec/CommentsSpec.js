@@ -4,7 +4,7 @@ describe("jQuery Comments Plugin", function () {
     var getURL = 'http://localhost/jQComment/comments.php';
 
     beforeEach(function () {
-        singleCommentJSON = {msg: "First Comment", user: "Naresh", updatedOn: "2014-09-19T15:28:46.493Z"};
+        singleCommentJSON = {id:1, msg: "First Comment", user: "Naresh", updatedOn: "2014-09-19T15:28:46.493Z"};
         setFixtures('<div id="comments"></div>');
         comments = $('#comments');
         jasmine.Ajax.install();
@@ -33,8 +33,8 @@ describe("jQuery Comments Plugin", function () {
     it("Should display the most recent comments on top", function () {
         var opts = {
             data: [singleCommentJSON,
-                {msg: "Second Comment", user: "James", updatedOn: "2014-06-19T15:28:46.493Z"},
-                {msg: "Third Comment", user: "Jack", updatedOn: "2014-12-19T15:28:46.493Z"}]
+                {id:2, msg: "Second Comment", user: "James", updatedOn: "2014-06-19T15:28:46.493Z"},
+                {id:3, msg: "Third Comment", user: "Jack", updatedOn: "2014-12-19T15:28:46.493Z"}]
         };
         comments.jQComments(opts);
         expect(comments.find('div.comment').size()).toBe(opts.data.length);
@@ -66,8 +66,8 @@ describe("jQuery Comments Plugin", function () {
     it("Should fetch data from URL and display comments", function () {
         var expectedAjaxResponse = [
             singleCommentJSON,
-            {msg: "Second Comment", user: "James", updatedOn: "2014-06-19T15:28:46.493Z"},
-            {msg: "Third Comment", user: "Jack", updatedOn: "2014-12-19T15:28:46.493Z"}
+            {id:2, msg: "Second Comment", user: "James", updatedOn: "2014-06-19T15:28:46.493Z"},
+            {id:3, msg: "Third Comment", user: "Jack", updatedOn: "2014-12-19T15:28:46.493Z"}
         ];
         jasmine.Ajax.stubRequest(getURL).andReturn({
             status: 200,

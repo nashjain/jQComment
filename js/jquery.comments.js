@@ -88,11 +88,11 @@ CommentsView.prototype.applyComments = function (opts, callback) {
             loggedInUser: undefined
         };
         var opts = $.extend(defaults, options);
-        var container = $(this);
+        var container = this;
         var cv = new CommentsView($);
         cv.applyComments(opts, function (content) {
             container.append(content);
         });
-        return this;
+        return container;
     }
 })(jQuery);
